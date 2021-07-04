@@ -1,0 +1,45 @@
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration</title>
+</head>
+<style>
+  .a{
+    width:300px;
+    height:400px;
+    padding:60px;
+    border:5px solid gray;
+    margin:100px;
+    background-color: #F8F0E3;
+  }
+</style>
+<body>
+<center>
+  <div class="a">
+    <h2>Sign up</h2>
+
+  <form method="POST">
+    {% csrf_token %}
+      {% for field in form %}
+      <p>
+        {{ field.label_tag }}<br>
+        {{ field }}
+      <!--  {% if field.help_text %}
+          <small style="display: none">{{ field.help_text }}</small>
+        {% endif %} -->
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+      {% endfor %}
+    <button type="submit"style="background-color:#008CBA;font-size: 18px; color: white;padding:2px 2px; margin:0;">Sign up</button>
+    <p>Already have an account<a href="login/">Login</a></p>
+
+  </form>
+</div>
+</center>
+  </body>
+</html>
+
+{% endblock %}
