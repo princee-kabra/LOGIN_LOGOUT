@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from.import views
+from django.conf.urls.static import static
+from django.views.static import serve
+from django.conf.urls import url
 
 
 urlpatterns = [
@@ -26,4 +29,7 @@ urlpatterns = [
     path('login/',views.login,name='login'),
     path(r'^activate/(?P<uidb64>[0-9A-Za-z_-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         views.activate, name='activate')
+    url(r'^media/(?P<path>.*)$', serve,{'document_root':       settings.MEDIA_ROOT}), 
+    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
 ]
+
